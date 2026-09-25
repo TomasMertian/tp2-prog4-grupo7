@@ -29,3 +29,4 @@ describe('NoteService - listNotes (Ejercicio 2)', () => {
     expect(notes[1].title).toBe('Segunda nota');
     });
 });
+// test en verde con la integración del ejercicio 1
