@@ -12,7 +12,7 @@ describe('NoteService - listNotes (Ejercicio 2)', () => {
     service = new NoteServiceImpl(repo);
     });
 
-    it('debe devolver una lista vacia si no hay notas', () => {
+    it('debe devolver una lista vacía si no hay notas', () => {
     const notes = service.listNotes();
     expect(notes).toHaveLength(0);
     expect(notes).toEqual([]);
@@ -29,4 +29,3 @@ describe('NoteService - listNotes (Ejercicio 2)', () => {
     expect(notes[1].title).toBe('Segunda nota');
     });
 });
-// test en verde con la integración del ejercicio 1
