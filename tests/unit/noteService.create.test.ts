@@ -1,15 +1,18 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach,vi } from 'vitest';
 import { NoteServiceImpl } from '../../src/services/NoteService';
 import { SqliteNoteRepository } from '../../src/repositories/NoteRepository';
 import { createDb } from '../../src/db/connection';
-
+import { notify } from '../../src/services/notificationService';
 // 🔴 EJERCICIO 1 — Este archivo YA ESTÁ ESCRITO y el test está en ROJO
 // porque NoteService.createNote todavía no está implementado.
 //
 // Consigna: NO modifiquen este archivo. Vayan a
 // src/services/NoteService.ts e implementen createNote hasta que estos
 // 3 tests pasen (Verde). Después, refactoricen si hace falta.
-
+  //mock con la ruta exacta del modulo
+vi.mock('../../src/services/notificationService', () => ({
+  notify: vi.fn(),
+}));
 describe('NoteService - createNote (Ejercicio 1)', () => {
   let service: NoteServiceImpl;
 
@@ -36,4 +39,17 @@ describe('NoteService - createNote (Ejercicio 1)', () => {
     service.createNote({ title: 'C', content: 'D' });
     expect(service.listNotes()).toHaveLength(2);
   });
+
+  // test ejercicio 6
+  describe('notify pinned - Notify (ejercicio 6)', () => {
+    it('creamos una nota pineada', () => {
+      const nota = service.createNote({
+        title: 'x',
+        content: 'y',
+        pinned: true
+      })
+      expect(notify).toHaveBeenCalledWith(nota)
+    }
+    )});
+
 });
