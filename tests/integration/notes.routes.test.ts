@@ -22,3 +22,23 @@ describe('PATCH /notes/:id (Ejercicio 4 - integracion)', () => {
     expect(res.status).toBe(404);
   });
 });
+
+describe('GET /notes/:id (Ejercicio 3 - integracion)', () => {
+  let app: ReturnType<typeof makeApp>;
+
+  beforeEach(() => {
+    app = makeApp(':memory:');
+  });
+
+  it('obtiene una nota por id (200)', async () => {
+    const creada = (await request(app).post('/notes').send({ title: 'A', content: 'B' })).body;
+    const res = await request(app).get(`/notes/${creada.id}`);
+    expect(res.status).toBe(200);
+    expect(res.body.title).toBe('A');
+  });
+
+  it('devuelve 404 si la nota no existe', async () => {
+    const res = await request(app).get('/notes/9999');
+    expect(res.status).toBe(404);
+  });
+});
