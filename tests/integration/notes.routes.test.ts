@@ -42,3 +42,22 @@ describe('GET /notes/:id (Ejercicio 3 - integracion)', () => {
     expect(res.status).toBe(404);
   });
 });
+
+describe('DELETE /notes/:id (Ejercicio 5 - integracion)', () => {
+  let app: ReturnType<typeof makeApp>;
+
+  beforeEach(() => {
+    app = makeApp(':memory:');
+  });
+
+  it('elimina una nota existente (204)', async () => {
+    const creada = (await request(app).post('/notes').send({ title: 'A', content: 'B' })).body;
+    const res = await request(app).delete(`/notes/${creada.id}`);
+    expect(res.status).toBe(204);
+  });
+
+  it('devuelve 404 si la nota no existe', async () => {
+    const res = await request(app).delete('/notes/9999');
+    expect(res.status).toBe(404);
+  });
+});
