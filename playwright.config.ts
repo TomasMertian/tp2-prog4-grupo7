@@ -5,6 +5,8 @@ export default defineConfig({
   timeout: 30_000,
   retries: 1,
   reporter: [['html'], ['list']],
+  outputDir: 'playwright-results',
+
   use: {
     baseURL: 'http://localhost:4000',
     trace: 'on-first-retry'
@@ -12,7 +14,7 @@ export default defineConfig({
   webServer: {
     command: 'npm run start:e2e',
     url: 'http://localhost:4000/health',
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: true,
     timeout: 20_000
   }
 });
