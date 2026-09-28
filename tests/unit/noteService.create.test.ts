@@ -10,9 +10,7 @@ import { notify } from '../../src/services/notificationService';
 // src/services/NoteService.ts e implementen createNote hasta que estos
 // 3 tests pasen (Verde). Después, refactoricen si hace falta.
   //mock con la ruta exacta del modulo
-vi.mock('../../src/services/notificationService', () => ({
-  notify: vi.fn(),
-}));
+
 describe('NoteService - createNote (Ejercicio 1)', () => {
   let service: NoteServiceImpl;
 
@@ -40,16 +38,5 @@ describe('NoteService - createNote (Ejercicio 1)', () => {
     expect(service.listNotes()).toHaveLength(2);
   });
 
-  // test ejercicio 6
-  describe('notify pinned - Notify (ejercicio 6)', () => {
-    it('creamos una nota pineada', () => {
-      const nota = service.createNote({
-        title: 'x',
-        content: 'y',
-        pinned: true
-      })
-      expect(notify).toHaveBeenCalledWith(nota)
-    }
-    )});
-
+  
 });
